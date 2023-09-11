@@ -1,0 +1,55 @@
+#kind: Service
+#apiVersion: v1
+#metadata:
+#  name: frontendsvc
+#  labels:
+#    name: frontend-app
+#spec:
+#  ports:
+#    - nodePort: 30165
+#      port: 3000
+#      targetPort: 3000
+#      protocol: TCP
+#  selector:
+#    app: frontend-app
+#  type: NodePort
+
+---
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: frontendappdeploy
+#spec:
+#  selector:
+#    matchLabels:
+#      app: frontend-app
+#  replicas: 1
+#  template:
+#    metadata:
+#      labels:
+#        app: frontend-app
+#    spec:
+#      containers:
+#        - name: frontend-container
+#          image: newimagefront
+#
+#          imagePullPolicy: Always
+#          ports:
+#            - containerPort: 3000
+#          resources:
+#            limits:
+#              memory: 512Mi
+#              cpu: "1"
+#            requests:
+#              memory: 256Mi
+#              cpu: "0.2"
+
+version: "3.8"
+services:
+  app:
+    container_name: docker-react-c
+    image: newimagefront
+    build:
+      context: .
+    ports :
+      - 8080:80
